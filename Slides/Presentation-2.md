@@ -1,13 +1,12 @@
 ---
 marp: true
 math: mathjax
+paginate: true
 ---
 
-# Algorithmic Recourse under incomplete causal graph
-
+# Algorithmic Recourse Under Incomplete Causal Graph
 
 ---
-
  
 Algorithmic Recourse: from Counterfactual Explanations to Interventions
 ===
@@ -15,7 +14,6 @@ Algorithmic Recourse: from Counterfactual Explanations to Interventions
 ## ACM 2021
 
 ---
- 
 Algorithmic Recourse
 ===
 The systematic process of reversing unfavourable decisions by algorithms and bureaucracies across a range of counterfactual scenarios.
@@ -55,7 +53,7 @@ In a world where home-seekers save %30 of their salary, a salary increase of 14%
 Structural Causal Model
 ===
 
-<style>P
+<style>
     img[alt~="center"]{
         display: block;
         margin: 0 auto;
@@ -107,6 +105,14 @@ $$
 
 ---
 # Limitations
+1) The underlying causal model is rarely known in practice.
+2) The assumption of one-to-one mapping from real world actions to interventions on endogenous variables may not hold.
+
+---
+# Limitations
+
+<span style="color:green;">1) The underlying causal model is rarely known in practice.</span>
+2) The assumption of one-to-one mapping from real world actions to interventions on endogenous variables may not hold.
 
 ---
 Algorithmic Recourse under imperfect causal knowledge: A probabilistic approach
@@ -114,4 +120,50 @@ Algorithmic Recourse under imperfect causal knowledge: A probabilistic approach
 
 ## NeurIPS 2020
 ---
+
+# Setting
+The causal graph is known but the structural equations are not known.
+
+---
+# No Recourse Guarantees for unknown structural equations
+**Example:** *Consider the following two SCMs $\mathcal{M_A}$ and $\mathcal{M_B}$.* 
+![center](figs/no_recourse.png)
+
+---
+*Choose $U_1, U_2 \sim Bernoulli(0.5)$ and $U_3 \sim Uniform(\{0,\dots,K\})$ independently in both $\mathcal{M_A}$ and $\mathcal{M_B}$ with structural equations*
+![Alt text](figs/equations.png)
+
+*Then $\mathcal{M_A}$ and $\mathcal{M_B}$ both imply exactly the same observational and interventional distributions, and thus indistiguishable from empirical data. However, having observed $x^\text{F}=(1,0,0)$, they predict differebt counterfactuals had $X_1$ been 0, i.e., $x^\text{SCF}(X_1=0)=(0,0,0)$ and $(0,0,K)$, respectively.*
+
+---
+
+# Proposition
+Unless the set of descendants of interevend-upon variables in empty, algorithmic recourse can in general, be guaranteed only if the true structural equations are known, irrespective of the amount and type of available data.
+
+---
+
+Method
+---
+The learned causal model could be imperfect due to finite sample of the observed data, or due to model misspecification.
+
+The authors adopt a Bayesian approach to account for the uncertainty in the estimation of the structural equations. They assume additive gaussian noise and rely on probabilistic regression using a Gaussian process (GP) prior over the functions $f_r$.
+
+---
+# GP-SCM
+$$
+\begin{align}
+X_r:&=f_r(\mathbf{X}_{\text{pa}(r)})+U_r\\
+where \quad & f_r \sim \mathcal{GP}(0, k_r),\quad U_r\sim\mathcal{N}(0, \sigma_r^2), \quad r\in [d]
+\end{align}
+$$
+
+---
+
+Add more math (proposition 5, 6 from the paper)
+
+---
+
+
+
+
 
