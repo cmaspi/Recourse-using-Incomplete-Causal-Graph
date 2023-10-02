@@ -163,7 +163,67 @@ Add more math (proposition 5, 6 from the paper)
 
 ---
 
+Algorithm for optimization
 
+---
+# Limitations
+
+
+
+
+---
+
+# Learning Representation for counterfactual inference
+
+
+---
+
+# Assumptions
+1. Acyclicity: Causal structure can be represented by DAG
+2. Markov Property: all nodes are independent of their non-descendants when conditioned on their parents
+3. Faithfulness: All conditioned independences in true underlying distribution p are represented in G
+4. Sufficiency: any pair of nodes in G has no common external cause.
+
+---
+
+# Tricks for Causal Discovery
+
+Trick | Algorithm
+ --- | --- 
+Conditional Independence Testing | PC, Fast Causal Inference (FCI), Inductive Causation (IC)
+Greedy Search of DAG Space | Greedy Equivalence Search (GES), Greedy Interventional Equivalence Search (GIES), Concave Penalized Coordinate Descent with Reparametrization (CCDr)
+Exploiting Asymmetry | Linear Non-Gaussian Acyclic Model (LiNGAM), Non-linear Additive Noise Model, Post-non linear Causal Model (PNL), Granger Causality
+Hybrid | Structural Agnostic Modeling (SAM), Causal Additive Model(CAM), Causal Generative Neural Network (CGNN)
+
+---
+
+# Trick-1: Conditional Independence Testing
+<style>
+    img[alt~="center"]{
+        display: block;
+        margin: 0 auto;
+    }
+</style>
+The key idea is that two statistically independent variables are not causally linked.
+
+![center width:600](figs/CIT.png)
+1. (B) Start with fully connected graph
+2. (C), (D) remove edges b/w statistically independent variables.
+3. (E) Orient Colliders
+4. (F) Additional Constraints.
+
+---
+
+# Trick-2: Greedy Equivalence Search (GES)
+
+The Greedy Equivalence Search (GES) algorithm uses this trick. GES starts with an empty graph and iteratively adds directed edges to maximize the improvement in a model fitness measure (i.e. score). An example score is the Bayesian Information Criterion (BIC) 
+
+---
+
+# Trick-3: Exploiting Asymmetries
+1. **Time Asymmetry:** Granger Causality (Cause precedes the effect)
+2. **Complexity Asymmetry:** Simpler models are better.
+3. **Functional Asymmetry:** Models that fit a relationship better, are better models.
 
 
 
