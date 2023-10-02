@@ -55,7 +55,7 @@ In a world where home-seekers save %30 of their salary, a salary increase of 14%
 Structural Causal Model
 ===
 
-<style>
+<style>P
     img[alt~="center"]{
         display: block;
         margin: 0 auto;
@@ -101,11 +101,17 @@ The assignment of structural counterfactual values can generally be written as
 $$
 \begin{align}
 x_i^{\text{SCF}} =& [i\in I]\cdot (x_i^\text{F}+\delta_i)\\
-&+[i\notin I]\cdot (x_i^\text{F}+f_i(pa_i^\text{SCF})+f_i(pa_i^\text{F}))
+&+[i\notin I]\cdot (x_i^\text{F}+f_i(\textbf{pa}_i^\text{SCF})+f_i(\textbf{pa}_i^\text{F}))
 \end{align}
 $$
 
 ---
+# Limitations
 
+---
+Algorithmic Recourse under imperfect causal knowledge: A probabilistic approach
+===
 
+## NeurIPS 2020
+---
 
