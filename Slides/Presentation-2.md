@@ -2,6 +2,10 @@
 marp: true
 math: mathjax
 paginate: true
+style: |
+    section{
+      justify-content: flex-start;
+    }
 ---
 	
 $\newcommand{\indep}{\perp \!\!\! \perp}$
