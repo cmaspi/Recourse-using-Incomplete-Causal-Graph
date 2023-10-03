@@ -224,7 +224,7 @@ $$
 
 ---
 
-# Trick-1: PC Algorithm
+# PC Algorithm
 <style>
     img[alt~="center"]{
         display: block;
@@ -241,7 +241,7 @@ The key idea is that two statistically independent variables are not causally li
 
 ---
 
-# Trick-2: Greedy Equivalence Search (GES)
+# Greedy Equivalence Search (GES)
 
 The Greedy Equivalence Search (GES) algorithm uses this trick. GES starts with an empty graph and iteratively adds directed edges to maximize the improvement in a model fitness measure (i.e. score). An example score is the Bayesian Information Criterion (BIC) 
 
