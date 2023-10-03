@@ -3,6 +3,8 @@ marp: true
 math: mathjax
 paginate: true
 ---
+	
+$\newcommand{\indep}{\perp \!\!\! \perp}$
 
 # Algorithmic Recourse Under Incomplete Causal Graph
 
@@ -77,8 +79,8 @@ $$
 \begin{align}
 \mathbf{A}^* \in \underset{A}{argmin}\quad &cost(\mathbf{A}; x^F)\\
 s.t.\quad & h(x^{\text{SCF}}) \neq h(x^\text{F}),\\
-& x^{\text{CFE}} = \mathbb{F_\mathbf{A}(\mathbb{F}^{-1}(x^\text{F}))}
-& x^{\text{CFE}} \in \mathcal{P},\, \mathbf{A} \in \mathcal{F} 
+& x^{\text{SCF}} = \mathbb{F_\mathbf{A}(\mathbb{F}^{-1}(x^\text{F}))}
+& x^{\text{SCF}} \in \mathcal{P},\, \mathbf{A} \in \mathcal{F} 
 \end{align}
 $$
 
@@ -152,20 +154,58 @@ The authors adopt a Bayesian approach to account for the uncertainty in the esti
 # GP-SCM
 $$
 \begin{align}
-X_r:&=f_r(\mathbf{X}_{\text{pa}(r)})+U_r\\
+X_r:&=f_r(\mathbf{X}_{pa(r)})+U_r\\
 where \quad & f_r \sim \mathcal{GP}(0, k_r),\quad U_r\sim\mathcal{N}(0, \sigma_r^2), \quad r\in [d]
 \end{align}
 $$
 
 ---
+# GP-SCM noise posterior
+$$
+\begin{align}
+u_r|\mathbf{X}_{pa(r)},\mathbf{x}_r &\sim \mathcal{N}\left(\sigma_r^2\left(\mathbf{K}+\sigma^2_r\mathbf{I}\right)^{-1}\mathbf{x}_r, \sigma^2_r\left(\mathbf{I}-\sigma^2_r\left(\mathbf{K}+\sigma^2_r\mathbf{I}\right)^{-1}\right)\right)\\
+where \quad & \mathbf{K} := \left(k_r\left(\mathbf{x}^i_{pa(r)},\mathbf{x}^j_{pa(r)},\right)\right)_{ij} \textit{denotes the Gram matrix}
+\end{align}
+$$
 
-Add more math (proposition 5, 6 from the paper)
+# GP-SCM counterfactual distribution
+$$
+\begin{align}
+X_r\left(\mathbf{X}_{pa(r) = \tilde{x}}\right)|\mathbf{x}^F,\{\mathbf{x}^i\}^n_{i=1} \sim \mathcal{N}\left(\mu^F + \mathbf{\tilde{k}}^T\left(\mathbf{K}+\sigma^2_r\mathbf{I}\right)^{-1}\mathbf{x}_r, s^F_r+\tilde{k}-\mathbf{\tilde{k}}^T\left(\mathbf{K}+\sigma^2_r\mathbf{I}\right)^{-1}\mathbf{\tilde{k}}\right)\\
+where \quad \tilde{k} := k_r\left(\mathbf{\tilde{x}}_{pa(r)},\mathbf{\tilde{x}}_{pa(r)}\right), \mathbf{\tilde{k}} := \left(k_r\left(\mathbf{\tilde{x}}_{pa(r)},\mathbf{x}^1_{pa(r)}\right),...,k_r\left(\mathbf{\tilde{x}}_{pa(r)},\mathbf{x}^n_{pa(r)}\right)\right)
+\end{align} 
+$$
+
+---
+# Probabilistic version of the individualised recourse
+$$
+\min_{a=do(\mathbf{x}_{mathcal{I}}=\theta)\in\mathbb{A}}\quad \text{cost}^F(a) \quad \text{subject to}\quad \mathbb{E}_{\mathbf{X}^{SCF}(a)}\left[h\left(\mathbf{X}^{SCF}(a)\right)\right] \geq \text{thresh(a)} 
+$$
+
+---
+# Algorithm for optimization
+## Brute-force approach
+A way to solve the objective is
+(i) Iterate over $a \in \mathbb{A}^F$
+(ii) approximately evaluate the constraint via Monte Carlo
+(iii) Select a minimum cost action amongst all evaluated candidates
+
+---
+## Gradient-based approach
+$$
+\begin{align}
+\mathcal{L}(\theta, \lambda) := \text{cost}^F(a) + \lambda\left(\text{thresh}(a)-\mathbb{E}_{\mathbf{X}_{d(\mathcal{I})|\theta}}\left[h\left(\mathbf{x}^F_{nd(\mathcal{I})},\mathbf{\theta},\mathbf{X}_{d(\mathcal{I})}\right)\right]\right)
+\end{align}
+$$
+Since GP-SCM counterfactual admit reparametrisation trick we get
+$$
+\begin{align}
+\nabla_{\theta}\mathbb{E}_{\mathbf{X}_{d(\mathcal{I})|\theta}}\left[h\left(\mathbf{x}^F_{nd(\mathcal{I})},\mathbf{\theta},\mathbf{X}_{d(\mathcal{I})}\right)\right] = \mathbb{E}_{\mathbf{z}\sim\mathcal{N}(0,1)}\left[\nabla_{\theta}h\left[f\left(\mathbf{x}^F_{nd(\mathcal{I})},\mathbf{\theta},\mathbf{x}_{d(\mathcal{I})}(\mathbf{z})\right)\right]\right]
+\end{align}
+$$
 
 ---
 
-Algorithm for optimization
-
----
 # Limitations
 
 
@@ -225,5 +265,34 @@ The Greedy Equivalence Search (GES) algorithm uses this trick. GES starts with a
 2. **Complexity Asymmetry:** Simpler models are better.
 3. **Functional Asymmetry:** Models that fit a relationship better, are better models.
 
+---
+# Linear Non-Gaussian Assumption
 
+All structural equation (causal mechanisms that generate the data) are of the following form:
+$$
+Y := f(X) + U
+$$
+whre $f$ is a linear function, $X \indep U$, and $U$ is distributed as some non-Gaussian
 
+---
+# Nonlinear Additive Noise Setting
+
+$$
+\begin{align}
+X_i := f_i(pa_i) + U_i \quad \text{where } f_i \text{ is nonlinear}
+\end{align}
+$$
+
+Theorem (Hoyer et al. 2008): Under the Markov assumption, causal sufficiency, acyclicity, the nonlinear additive noise assumption, and a technical condition from Hoyer et al. 2008, we can identify the causal graph.
+
+---
+# Post-Nonlinear Setting
+Nonlinear additive noise setting: $Y:= f(x) + U, \quad X\indep U$
+
+Post-nonlinear:
+$$
+Y:=g(f(X)+U),\quad X\indep U
+$$
+
+---
+# References
