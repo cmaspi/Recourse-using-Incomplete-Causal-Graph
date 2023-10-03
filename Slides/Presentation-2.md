@@ -179,7 +179,7 @@ $$
 ---
 # Probabilistic version of the individualised recourse
 $$
-\min_{a=do(\mathbf{x}_{mathcal{I}}=\theta)\in\mathbb{A}}\quad \text{cost}^F(a) \quad \text{subject to}\quad \mathbb{E}_{\mathbf{X}^{SCF}(a)}\left[h\left(\mathbf{X}^{SCF}(a)\right)\right] \geq \text{thresh(a)} 
+\min_{a=do(\mathbf{x}_{\mathcal{I}}=\theta)\in\mathbb{A}}\quad \text{cost}^F(a) \quad \text{subject to}\quad \mathbb{E}_{\mathbf{X}^{SCF}(a)}\left[h\left(\mathbf{X}^{SCF}(a)\right)\right] \geq \text{thresh(a)} 
 $$
 
 ---
