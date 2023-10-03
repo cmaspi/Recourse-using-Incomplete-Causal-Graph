@@ -186,9 +186,9 @@ $$
 # Algorithm for optimization
 ## Brute-force approach
 A way to solve the objective is
-(i) Iterate over $a \in \mathbb{A}^F$
-(ii) approximately evaluate the constraint via Monte Carlo
-(iii) Select a minimum cost action amongst all evaluated candidates
+1. Iterate over $a \in \mathbb{A}^F$
+2. Approximately evaluate the constraint via Monte Carlo
+3. Select a minimum cost action amongst all evaluated candidates
 
 ---
 ## Gradient-based approach
@@ -200,7 +200,7 @@ $$
 Since GP-SCM counterfactual admit reparametrisation trick we get
 $$
 \begin{align}
-\nabla_{\theta}\mathbb{E}_{\mathbf{X}_{d(\mathcal{I})|\theta}}\left[h\left(\mathbf{x}^F_{nd(\mathcal{I})},\mathbf{\theta},\mathbf{X}_{d(\mathcal{I})}\right)\right] = \mathbb{E}_{\mathbf{z}\sim\mathcal{N}(0,1)}\left[\nabla_{\theta}h\left[f\left(\mathbf{x}^F_{nd(\mathcal{I})},\mathbf{\theta},\mathbf{x}_{d(\mathcal{I})}(\mathbf{z})\right)\right]\right]
+\nabla_{\theta}\mathbb{E}_{\mathbf{X}_{d(\mathcal{I})|\theta}}\left[h\left(\mathbf{x}^F_{nd(\mathcal{I})},\mathbf{\theta},\mathbf{X}_{d(\mathcal{I})}\right)\right] = \mathbb{E}_{\mathbf{z}\sim\mathcal{N}(0,1)}\left[\nabla_{\theta}h\left(\mathbf{x}^F_{nd(\mathcal{I})},\mathbf{\theta},\mathbf{x}_{d(\mathcal{I})}(\mathbf{z})\right)\right]
 \end{align}
 $$
 
@@ -208,13 +208,8 @@ $$
 
 # Limitations
 
-
-
-
----
-
-# Learning Representation for counterfactual inference
-
+1. Complete causal graph should be known.
+2. The assumption of one-to-one mapping from real world actions to interventions on endogenous variables may not hold.
 
 ---
 
