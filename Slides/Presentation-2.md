@@ -96,9 +96,9 @@ Given an individual $x^F$ observed in world $\mathcal{M}$, a family of feasible 
 ---
 
 # Algorithm
-1) **Abduction:** uniquely determines the values of all exogenous variables.
-2) **Action:** modify the SCM according to the hypothetical interventions. ($\mathbb{F}_A$)
-3) **Prediction:** Determine the values of of all endogenous variables.
+1. **Abduction:** uniquely determines the values of all exogenous variables.
+2. **Action:** modify the SCM according to the hypothetical interventions. ($\mathbb{F}_A$)
+3. **Prediction:** Determine the values of of all endogenous variables.
 
 The assignment of structural counterfactual values can generally be written as
 
@@ -111,8 +111,8 @@ $$
 
 ---
 # Limitations
-1) The underlying causal model is rarely known in practice.
-2) The assumption of one-to-one mapping from real world actions to interventions on endogenous variables may not hold.
+1. The underlying causal model is rarely known in practice.
+2. The assumption of one-to-one mapping from real world actions to interventions on endogenous variables may not hold.
 
 ---
 # Limitations
@@ -209,7 +209,11 @@ $$
 $$
 
 ---
+# Results
 
+![center width:1000](image.png)
+
+---
 # Limitations
 
 1. Complete causal graph should be known.
