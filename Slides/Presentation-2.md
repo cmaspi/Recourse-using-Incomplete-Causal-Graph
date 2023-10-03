@@ -3,10 +3,24 @@ marp: true
 math: mathjax
 paginate: true
 
+
 style: |
-  section {
-    justify-content: start;
-    
+  section > h1 {
+  flex: 1 0 auto;
+  padding: 0;
+  margin: 0;
+  order: -999999;
+               }
+
+  section:has(> h1)::before {
+  flex: 1 0 auto;
+  display: block;
+  content: '';
+  order: 999999;
+    }
+
+  h6 {
+    font-size: 100px
   }
 ---
 
@@ -69,10 +83,10 @@ Structural Causal Model
 
 ---
 
-# Proposition-1
+## Proposition-1
 A CFE-based action, $\mathbf{A}^{CFE}$, where $I=\{i|\delta_i^*\neq 0\}$, performed by individual $x^F$, in general results in the structural counterfactual, $x^{SCF}=x^{*CFE}:=x^{F}+\delta^*$, if and only if, the set of descendants of the acted upon variables, determined by $I$, is the empty set.
 
-# Corollary-1
+## Corollary-1
 If the true world $\mathcal{M}$ is independent, i.e. all the observed features are root-nodes, then CFE-based actions always guarantee recourse.
 
 ---
@@ -116,8 +130,8 @@ $$
 ---
 # Limitations
 
-<span style="color:green;">1) The underlying causal model is rarely known in practice.</span>
-2) The assumption of one-to-one mapping from real world actions to interventions on endogenous variables may not hold.
+1. <span style="color:green;">The underlying causal model is rarely known in practice.</span>
+2. The assumption of one-to-one mapping from real world actions to interventions on endogenous variables may not hold.
 
 ---
 Algorithmic Recourse under imperfect causal knowledge: A probabilistic approach
@@ -141,12 +155,12 @@ The causal graph is known but the structural equations are not known.
 *Choose $U_1, U_2 \sim Bernoulli(0.5)$ and $U_3 \sim Uniform(\{0,\dots,K\})$ independently in both $\mathcal{M_A}$ and $\mathcal{M_B}$ with structural equations*
 ![Alt text](figs/equations.png)
 
-*Then $\mathcal{M_A}$ and $\mathcal{M_B}$ both imply exactly the same observational and interventional distributions, and thus indistiguishable from empirical data. However, having observed $x^\text{F}=(1,0,0)$, they predict differebt counterfactuals had $X_1$ been 0, i.e., $x^\text{SCF}(X_1=0)=(0,0,0)$ and $(0,0,K)$, respectively.*
+*Then $\mathcal{M_A}$ and $\mathcal{M_B}$ both imply exactly the same observational and interventional distributions, and thus indistiguishable from empirical data. However, having observed $x^\text{F}=(1,0,0)$, they predict different counterfactuals had $X_1$ been 0, i.e., $x^\text{SCF}(X_1=0)=(0,0,0)$ and $(0,0,K)$, respectively.*
 
 ---
 
 # Proposition
-Unless the set of descendants of interevend-upon variables in empty, algorithmic recourse can in general, be guaranteed only if the true structural equations are known, irrespective of the amount and type of available data.
+Unless the set of descendants of interevend-upon variables in empty, algorithmic recourse can in general, be guaranteed **only** if the true structural equations are known, irrespective of the amount and type of available data.
 
 ---
 
@@ -166,7 +180,7 @@ where \quad & f_r \sim \mathcal{GP}(0, k_r),\quad U_r\sim\mathcal{N}(0, \sigma_r
 $$
 
 ---
-# GP-SCM noise posterior
+## GP-SCM noise posterior
 $$
 \begin{align}
 u_r|\mathbf{X}_{pa(r)},\mathbf{x}_r &\sim \mathcal{N}\left(\sigma_r^2\left(\mathbf{K}+\sigma^2_r\mathbf{I}\right)^{-1}\mathbf{x}_r, \sigma^2_r\left(\mathbf{I}-\sigma^2_r\left(\mathbf{K}+\sigma^2_r\mathbf{I}\right)^{-1}\right)\right)\\
@@ -174,7 +188,7 @@ where \quad & \mathbf{K} := \left(k_r\left(\mathbf{x}^i_{pa(r)},\mathbf{x}^j_{pa
 \end{align}
 $$
 
-# GP-SCM counterfactual distribution
+## GP-SCM counterfactual distribution
 $$
 \begin{align}
 X_r\left(\mathbf{X}_{pa(r) = \tilde{x}}\right)|\mathbf{x}^F,\{\mathbf{x}^i\}^n_{i=1} \sim \mathcal{N}\left(\mu^F + \mathbf{\tilde{k}}^T\left(\mathbf{K}+\sigma^2_r\mathbf{I}\right)^{-1}\mathbf{x}_r, s^F_r+\tilde{k}-\mathbf{\tilde{k}}^T\left(\mathbf{K}+\sigma^2_r\mathbf{I}\right)^{-1}\mathbf{\tilde{k}}\right)\\
@@ -197,7 +211,7 @@ A way to solve the objective is
 3. Select a minimum cost action amongst all evaluated candidates
 
 ---
-## Gradient-based approach
+# Gradient-based approach
 $$
 \begin{align}
 \mathcal{L}(\theta, \lambda) := \text{cost}^F(a) + \lambda\left(\text{thresh}(a)-\mathbb{E}_{\mathbf{X}_{d(\mathcal{I})|\theta}}\left[h\left(\mathbf{x}^F_{nd(\mathcal{I})},\mathbf{\theta},\mathbf{X}_{d(\mathcal{I})}\right)\right]\right)
@@ -220,6 +234,11 @@ $$
 
 1. Complete causal graph should be known.
 2. The assumption of one-to-one mapping from real world actions to interventions on endogenous variables may not hold.
+
+---
+
+
+<h6>Towards Incomplete Causal Graph</h6>
 
 
 ---
