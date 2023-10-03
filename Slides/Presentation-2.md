@@ -3,9 +3,9 @@ marp: true
 math: mathjax
 paginate: true
 style: |
-    section{
-      justify-content: flex-start;
-    }
+  section {
+    justify-content: start;
+  }
 ---
 	
 $\newcommand{\indep}{\perp \!\!\! \perp}$
@@ -136,6 +136,8 @@ The causal graph is known but the structural equations are not known.
 ![center](figs/no_recourse.png)
 
 ---
+# Contd.
+
 *Choose $U_1, U_2 \sim Bernoulli(0.5)$ and $U_3 \sim Uniform(\{0,\dots,K\})$ independently in both $\mathcal{M_A}$ and $\mathcal{M_B}$ with structural equations*
 ![Alt text](figs/equations.png)
 
@@ -148,8 +150,8 @@ Unless the set of descendants of interevend-upon variables in empty, algorithmic
 
 ---
 
-Method
----
+# Method
+
 The learned causal model could be imperfect due to finite sample of the observed data, or due to model misspecification.
 
 The authors adopt a Bayesian approach to account for the uncertainty in the estimation of the structural equations. They assume additive gaussian noise and rely on probabilistic regression using a Gaussian process (GP) prior over the functions $f_r$.
