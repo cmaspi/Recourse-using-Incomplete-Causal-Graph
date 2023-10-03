@@ -2,32 +2,32 @@
 marp: true
 math: mathjax
 paginate: true
+
 style: |
   section {
     justify-content: start;
+    
   }
 ---
-	
+
 $\newcommand{\indep}{\perp \!\!\! \perp}$
 
 # Algorithmic Recourse Under Incomplete Causal Graph
 
 ---
  
-Algorithmic Recourse: from Counterfactual Explanations to Interventions
-===
+# Algorithmic Recourse: from Counterfactual Explanations to Interventions
+
  
 ## ACM 2021
 
 ---
-Algorithmic Recourse
-===
+# Algorithmic Recourse
+
 The systematic process of reversing unfavourable decisions by algorithms and bureaucracies across a range of counterfactual scenarios.
  
 ---
- 
-Problem Formulation
-===
+# Problem Formulation
 
 $$x^{\text{*CFE}} \in \underset{x}{argmin}\quad dist(x, x^F) \quad s.t. \; h(x) \neq h(x^F), x\in \mathcal{P}$$
  
@@ -53,12 +53,11 @@ $$h = sgn(X_1+5X_2 - \$225,000)$$
     1. Annual salary: \$100,000 or
     2. Bank Balance: $30,000
  
-In a world where home-seekers save %30 of their salary, a salary increase of 14% would result in positive decision of loan-granting algorithm.
+In a world where home-seekers save 30% of their salary, a salary increase of 14% would result in positive decision of loan-granting algorithm.
  
 ---
 Structural Causal Model
 ===
-
 <style>
     img[alt~="center"]{
         display: block;
@@ -128,6 +127,7 @@ Algorithmic Recourse under imperfect causal knowledge: A probabilistic approach
 ---
 
 # Setting
+
 The causal graph is known but the structural equations are not known.
 
 ---
@@ -221,28 +221,10 @@ $$
 1. Complete causal graph should be known.
 2. The assumption of one-to-one mapping from real world actions to interventions on endogenous variables may not hold.
 
----
-
-# Assumptions
-1. Acyclicity: Causal structure can be represented by DAG
-2. Markov Property: all nodes are independent of their non-descendants when conditioned on their parents
-3. Faithfulness: All conditioned independences in true underlying distribution p are represented in G
-4. Sufficiency: any pair of nodes in G has no common external cause.
 
 ---
 
-# Tricks for Causal Discovery
-
-Trick | Algorithm
- --- | --- 
-Conditional Independence Testing | PC, Fast Causal Inference (FCI), Inductive Causation (IC)
-Greedy Search of DAG Space | Greedy Equivalence Search (GES), Greedy Interventional Equivalence Search (GIES), Concave Penalized Coordinate Descent with Reparametrization (CCDr)
-Exploiting Asymmetry | Linear Non-Gaussian Acyclic Model (LiNGAM), Non-linear Additive Noise Model, Post-non linear Causal Model (PNL), Granger Causality
-Hybrid | Structural Agnostic Modeling (SAM), Causal Additive Model(CAM), Causal Generative Neural Network (CGNN)
-
----
-
-# Trick-1: Conditional Independence Testing
+# Trick-1: PC Algorithm
 <style>
     img[alt~="center"]{
         display: block;
@@ -262,13 +244,6 @@ The key idea is that two statistically independent variables are not causally li
 # Trick-2: Greedy Equivalence Search (GES)
 
 The Greedy Equivalence Search (GES) algorithm uses this trick. GES starts with an empty graph and iteratively adds directed edges to maximize the improvement in a model fitness measure (i.e. score). An example score is the Bayesian Information Criterion (BIC) 
-
----
-
-# Trick-3: Exploiting Asymmetries
-1. **Time Asymmetry:** Granger Causality (Cause precedes the effect)
-2. **Complexity Asymmetry:** Simpler models are better.
-3. **Functional Asymmetry:** Models that fit a relationship better, are better models.
 
 ---
 # Linear Non-Gaussian Assumption
