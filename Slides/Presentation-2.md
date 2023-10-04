@@ -271,7 +271,7 @@ All structural equation (causal mechanisms that generate the data) are of the fo
 $$
 Y := f(X) + U
 $$
-whre $f$ is a linear function, $X \indep U$, and $U$ is distributed as some non-Gaussian
+where $f$ is a linear function, $X \indep U$, and $U$ is distributed as some non-Gaussian
 
 ---
 # Nonlinear Additive Noise Setting
@@ -295,3 +295,10 @@ $$
 
 ---
 # References
+ 1. [Algorithmic Recourse: from Counterfactual Explanations to Interventions](https://dl.acm.org/doi/10.1145/3442188.3445899)
+
+ 2. [Algorithmic recourse under imperfect causal knowledge: a probabilistic approach](https://arxiv.org/abs/2006.06831)
+
+ 3. [A Linear Non-Gaussian Acyclic Model for Causal Discovery](https://dl.acm.org/doi/10.5555/1248547.1248619)
+
+ 4. [Nonlinear causal discovery with additive noise models](https://papers.nips.cc/paper_files/paper/2008/hash/f7664060cc52bc6f3d620bcedc94a4b6-Abstract.html)
