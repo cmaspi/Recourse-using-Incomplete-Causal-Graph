@@ -227,7 +227,7 @@ $$
 ---
 # Results
 
-![center width:1000](image.png)
+![center width:1000](figs/results.png)
 
 ---
 # Limitations
