@@ -35,16 +35,16 @@ class Diamond:
         return np.c_[[self.__generate_diamond_helper__() for _ in range(n)]]
 
     def __generate_diamond_helper__(self
-                                ) -> np.ndarray:
+                                    ) -> np.ndarray:
         """_summary_
 
         Returns:
             np.ndarray: [w, x, y, z]
         """
         w = self.n_w()
-        x = w*w + self.n_x()
-        y = 4*np.sqrt(np.abs(w)) + self.n_y()
-        z = 2*np.sin(x) + 2*np.sin(y) + self.n_z()
+        x = w * w + self.n_x()
+        y = 4 * np.sqrt(np.abs(w)) + self.n_y()
+        z = 2 * np.sin(x) + 2 * np.sin(y) + self.n_z()
         return np.array([w, x, y, z])
 
 
@@ -57,4 +57,3 @@ if __name__ == '__main__':
     dataset = DataGen.generate_diamond(100)
     print(dataset.shape)
     print(dataset)
-    
