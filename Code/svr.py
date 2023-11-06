@@ -39,4 +39,6 @@ cg = [(0, 1), (1, 0), (1, 3), (3, 1), (3, 2), (2, 3), (0, 2), (2, 0)]
 causal_graph = []
 for x, y in cg:
     if is_consistent(data, x, y):
-        causal_graph.append(x, y)
+        causal_graph.append((x, y))
+
+print(causal_graph)
