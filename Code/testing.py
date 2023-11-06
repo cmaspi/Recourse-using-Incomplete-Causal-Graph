@@ -9,18 +9,31 @@ from causallearn.graph.GraphClass import CausalGraph
 
 # os.environ["PATH"] += os.pathsep+
 
-DataGen = Diamond(lambda: np.random.uniform(-3, 3),
-                      lambda: np.random.uniform(-1, 1),
-                      lambda: np.random.uniform(-1, 1),
-                      lambda: np.random.uniform(-1, 1)
-                      )
+DataGen = Diamond(
+    lambda: np.random.uniform(-3, 3),
+    lambda: np.random.uniform(-1, 1),
+    lambda: np.random.uniform(-1, 1),
+    lambda: np.random.uniform(-1, 1),
+)
 
-data = DataGen.generate_diamond(1000)
+data = DataGen.generate_diamond(10000)
 
 cg = CausalGraph(4)
 nodes = cg.G.get_nodes()
 
-bk = BackgroundKnowledge().add_required_by_node(nodes[0],nodes[2]).add_required_by_node(nodes[2],nodes[0])
-cg_with_bk = pc(data,alpha=0.05,indep_test="kci",kernelZ="Gaussian",background_knowledge=bk)
-print(cg_with_bk.find_adj())
-print(cg_with_bk.G.get_graph_edges())
+bk = (
+    BackgroundKnowledge()
+    .add_required_by_node(nodes[0], nodes[2])
+    .add_required_by_node(nodes[2], nodes[0])
+)
+cg = pc(
+    data,
+    alpha=0.05,
+    indep_test="kci",
+    kernelX="Gaussian",
+    kernelY="Gaussian",
+    kernelZ="Gaussian",
+)
+# print(cg_with_bk.find_adj())
+# print(cg_with_bk.G.get_graph_edges())
+print(cg.find_adj())
