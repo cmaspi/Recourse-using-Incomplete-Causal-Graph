@@ -16,7 +16,7 @@ sed -i '4s/.*/from collections.abc import Iterable/' _venv/lib/python3.10/site-p
 
 ## Performing Causal Discovery
 ```shell
-python causal_discovery/main.py
+python causal_discovery/main.py --scm_class diamond
 ```
 
 ## Finding the recourses and generating the tables
