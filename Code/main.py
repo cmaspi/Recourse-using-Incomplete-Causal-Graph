@@ -9,25 +9,7 @@ from sklearn.svm import SVR
 from hsic import hsic_gam
 from sklearn.model_selection import train_test_split
 
-
-def is_consistent(data, x, y):
-    X = data[:, x].reshape(-1, 1)
-    y = data[:, y]
-
-    # Fitting a non-linear regression
-    X_train, X_test, y_train, y_test = train_test_split(
-        X, y, test_size=0.2, random_state=42
-    )
-
-    svr = SVR(kernel="rbf", gamma="auto")
-    svr.fit(X_train, y_train)
-
-    y_pred = svr.predict(X_test)
-    residuals = (y_test - y_pred).reshape(-1, 1)
-
-    test_stat, thresh = hsic_gam(X_test, residuals, 0.05)
-
-    return test_stat < 3*thresh
+from svr import is_consistent
 
 # Uncomment the data generator which you would like to use and comment the others
 
