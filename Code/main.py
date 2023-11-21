@@ -9,7 +9,7 @@ from sklearn.svm import SVR
 from hsic import hsic_gam
 from sklearn.model_selection import train_test_split
 
-from svr import is_consistent
+from utils import is_consistent
 
 # Uncomment the data generator which you would like to use and comment the others
 
